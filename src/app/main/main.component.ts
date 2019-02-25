@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-main',
-  templateUrl: '../views/main.component.html'
+  templateUrl: './main.component.html'
 })
 export class MainComponent {
 
