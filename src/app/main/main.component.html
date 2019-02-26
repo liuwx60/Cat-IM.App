@@ -1,4 +1,73 @@
-<div>
-  <a routerLink="/login">login</a>
-  <button (click)="loginService.log()">debug</button>
+<div class="main-container">
+  <div class="message-list-container">
+    <div class="search-input">
+      <i nz-icon type="search" theme="outline"></i>
+      <input type="text" placeholder="Search...">
+    </div>
+    <ul class="chat-list">
+      <li class="chat-item">
+        <nz-badge [nzCount]="5">
+          <nz-avatar [nzSize]="40" nzSrc="../../assets/avatars/1.jpg"></nz-avatar>
+        </nz-badge>
+        <div class="chat-body">
+          <div class="chat-title">CatChat</div>
+          <div class="chat-content">[Emoji]</div>
+        </div>
+        <div class="chat-time">11mins</div>
+      </li>
+      <li class="chat-item active">
+        <nz-badge [nzCount]="5">
+          <nz-avatar [nzSize]="40" nzSrc="../../assets/avatars/1.jpg"></nz-avatar>
+        </nz-badge>
+        <div class="chat-body">
+          <div class="chat-title">CatChat</div>
+          <div class="chat-content">[Emoji]</div>
+        </div>
+        <div class="chat-time">11mins</div>
+      </li>
+      <li class="chat-item">
+        <nz-badge [nzCount]="7">
+          <nz-avatar [nzSize]="40" nzSrc="../../assets/avatars/1.jpg"></nz-avatar>
+        </nz-badge>
+        <div class="chat-body">
+          <div class="chat-title">CatChat</div>
+          <div class="chat-content">[Emoji]</div>
+        </div>
+        <div class="chat-time">11mins</div>
+      </li>
+      <li class="chat-item">
+        <div class="chat-avatar">
+          <img src="../../assets/avatars/1.jpg" alt="cat">
+        </div>
+        <div class="chat-body">
+          <div class="chat-title">CatChat</div>
+          <div class="chat-content">[Emoji]</div>
+        </div>
+        <div class="chat-time">11mins</div>
+      </li>
+      <li class="chat-item">
+        <div class="chat-avatar">
+          <img src="../../assets/avatars/1.jpg" alt="cat">
+        </div>
+        <div class="chat-body">
+          <div class="chat-title">CatChat</div>
+          <div class="chat-content">[Emoji]</div>
+        </div>
+        <div class="chat-time">11mins</div>
+      </li>
+    </ul>
+
+    <div class="chat-nav">
+      <div class="nav-item active">
+        <i nz-icon type="wechat" theme="outline"></i>
+      </div>
+      <div class="nav-item">
+        <i nz-icon type="user" theme="outline"></i>
+      </div>
+      <div class="nav-item">
+        <i nz-icon type="setting" theme="outline"></i>
+      </div>
+    </div>
+  </div>
+  <div class="message-box-container"></div>
 </div>
