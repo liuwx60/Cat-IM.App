@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../services/http.service';
 import { Router } from '@angular/router';
 import { LoginRequest } from './models/LoginResquest';
 import { LoginResponse } from './models/LoginResponse';
+import { HttpService } from '../utils/services/http.service';
 
 @Injectable()
 export class LoginService {
@@ -14,7 +14,7 @@ export class LoginService {
 
   public Login(request: LoginRequest): void {
     this.http.post<LoginResponse>('/api/user/login', request).subscribe(response => {
-      this.http.token = response.token;
+      sessionStorage.setItem('token', response.token);
       this.router.navigateByUrl('/');
     });
   }
