@@ -15,6 +15,8 @@ import zh from '@angular/common/locales/zh';
 import { HttpService } from './utils/services/http.service';
 import { FriendService } from './utils/services/friend.service';
 import { WebSocketService } from './utils/services/webSocket.service';
+import { ChatService } from './utils/services/chat.service';
+import { UserService } from './utils/services/user.service';
 
 registerLocaleData(zh);
 
@@ -37,6 +39,8 @@ registerLocaleData(zh);
     LoginService,
     FriendService,
     WebSocketService,
+    ChatService,
+    UserService,
     { provide: NZ_I18N, useValue: zh_CN }
   ],
   bootstrap: [AppComponent]

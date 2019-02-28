@@ -5,52 +5,12 @@
       <input type="text" placeholder="Search...">
     </div>
     <ul class="chat-list">
-      <li class="chat-item">
+      <li class="chat-item" *ngFor="let item of friends" (click)="switchChat(item.id)" [ngClass]="{'active': selectUserId === item.id}">
         <nz-badge [nzCount]="5">
           <nz-avatar [nzSize]="40" nzSrc="../../assets/avatars/1.jpg"></nz-avatar>
         </nz-badge>
         <div class="chat-body">
-          <div class="chat-title">CatChat</div>
-          <div class="chat-content">[Emoji]</div>
-        </div>
-        <div class="chat-time">11mins</div>
-      </li>
-      <li class="chat-item active">
-        <nz-badge [nzCount]="5">
-          <nz-avatar [nzSize]="40" nzSrc="../../assets/avatars/1.jpg"></nz-avatar>
-        </nz-badge>
-        <div class="chat-body">
-          <div class="chat-title">CatChat</div>
-          <div class="chat-content">[Emoji]</div>
-        </div>
-        <div class="chat-time">11mins</div>
-      </li>
-      <li class="chat-item">
-        <nz-badge [nzCount]="7">
-          <nz-avatar [nzSize]="40" nzSrc="../../assets/avatars/1.jpg"></nz-avatar>
-        </nz-badge>
-        <div class="chat-body">
-          <div class="chat-title">CatChat</div>
-          <div class="chat-content">[Emoji]</div>
-        </div>
-        <div class="chat-time">11mins</div>
-      </li>
-      <li class="chat-item">
-        <div class="chat-avatar">
-          <img src="../../assets/avatars/1.jpg" alt="cat">
-        </div>
-        <div class="chat-body">
-          <div class="chat-title">CatChat</div>
-          <div class="chat-content">[Emoji]</div>
-        </div>
-        <div class="chat-time">11mins</div>
-      </li>
-      <li class="chat-item">
-        <div class="chat-avatar">
-          <img src="../../assets/avatars/1.jpg" alt="cat">
-        </div>
-        <div class="chat-body">
-          <div class="chat-title">CatChat</div>
+          <div class="chat-title">{{ item.nickName }}</div>
           <div class="chat-content">[Emoji]</div>
         </div>
         <div class="chat-time">11mins</div>
@@ -69,38 +29,30 @@
       </div>
     </div>
   </div>
-  <div class="message-box-container">
+  <div class="message-box-container" *ngIf="selectUserId">
     <div class="chat-box-header">
       <div class="header-user-info">
         <div class="user-info-name">CatChat</div>
-        <div class="user-info-dynamic">嘿嘿。。。❤❤❤</div>
+        <div class="user-info-dynamic">嘿嘿。。。❤❤❤{{ chatService.count }}</div>
       </div>
       <div class="header-more">...</div>
     </div>
     <div class="chat-box-body">
       <ul class="chat-list">
-        <li class="chat-item">
+        <li class="chat-item" *ngFor="let item of (chatService.messageRecord.get(selectUserId) || [])" [ngClass]="{'right': item.Sender === user.id}">
           <div class="chat-avatar">
             <img src="../../assets/avatars/1.jpg">
           </div>
           <div class="chat-content">
-            嘿嘿嘿🎉
-          </div>
-        </li>
-        <li class="chat-item right">
-          <div class="chat-avatar">
-            <img src="../../assets/avatars/1.jpg">
-          </div>
-          <div class="chat-content">
-            嘿嘿嘿🎉
+            {{ item.Body }}
           </div>
         </li>
       </ul>
     </div>
     <div class="chat-box-footer">
-      <input type="text" class="footer-input" placeholder="Sending content">
+      <input type="text" class="footer-input" placeholder="Sending content" [(ngModel)]="sendContent">
       <div class="footer-action">
-        <button type="button" class="action-send">❤</button>
+        <button type="button" class="action-send" (click)="send()">❤</button>
       </div>
     </div>
   </div>
