@@ -1,0 +1,38 @@
+<div class="friend-container">
+  <div class="friend-list-container">
+    <div class="search-input">
+      <i nz-icon type="search" theme="outline"></i>
+      <input type="text" placeholder="Search...">
+    </div>
+    <ul class="friend-list">
+      <li class="friend-item" *ngFor="let item of data.friends" (click)="switchFriend(item)" [ngClass]="{'active': friend ? item.id === friend.id : false}">
+        <nz-badge>
+          <nz-avatar [nzSize]="40" nzSrc="../../assets/avatars/1.jpg"></nz-avatar>
+        </nz-badge>
+        <div class="friend-body">
+          <div class="friend-title">{{ item.nickName }}</div>
+        </div>
+      </li>
+    </ul>
+
+    <app-nav></app-nav>
+  </div>
+  <div class="friend-detail-container" *ngIf="friend">
+    <div class="friend-detail">
+      <div class="header">
+        <div class="info">
+          <div>{{ friend.nickName }}</div>
+          <div>哈哈哈。。。😝😝😝</div>
+        </div>
+        <div class="avatar">
+          <img src="../../../assets/avatars/1.jpg">
+        </div>
+      </div>
+
+      <div class="detail"></div>
+      <div class="action">
+          <button nz-button nzType="primary" (click)="sendMsg()">Send Message</button>
+      </div>
+    </div>
+  </div>
+</div>

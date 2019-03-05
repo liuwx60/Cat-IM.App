@@ -68,6 +68,8 @@ ul,li{ padding:0;margin:0;list-style:none }
 
         .chat-content {
           font-size: 12px;
+          height: 18px;
+          overflow: hidden;
         }
       }
 
@@ -88,25 +90,6 @@ ul,li{ padding:0;margin:0;list-style:none }
       &:hover {
         background: rgba(64, 169, 255, 0.11);
       }
-    }
-  }
-
-  .chat-nav {
-    height: 50px;
-    background: #ffffff;
-    display: flex;
-    box-shadow: 0 -.5px #ccc;
-    font-size: 18px;
-    color: #5f5f5f;
-
-    .nav-item {
-      flex: 1;
-      text-align: center;
-      line-height: 50px
-    }
-
-    .active {
-      color: #40a9ff;
     }
   }
 }
@@ -174,6 +157,13 @@ ul,li{ padding:0;margin:0;list-style:none }
         margin-right: 12px;
         background: #bae7ff;
         padding: 12px;
+        max-width: 50%;
+      }
+
+      .chat-sending {
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
       }
     }
 

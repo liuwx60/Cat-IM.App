@@ -5,46 +5,39 @@
       <input type="text" placeholder="Search...">
     </div>
     <ul class="chat-list">
-      <li class="chat-item" *ngFor="let item of friends" (click)="switchChat(item.id)" [ngClass]="{'active': selectUserId === item.id}">
-        <nz-badge [nzCount]="5">
+      <li class="chat-item" *ngFor="let item of data.latelyChats" (click)="switchChat(item.userId)" [ngClass]="{'active': data.chatUserId === item.userId}">
+        <nz-badge [nzCount]="item.count">
           <nz-avatar [nzSize]="40" nzSrc="../../assets/avatars/1.jpg"></nz-avatar>
         </nz-badge>
         <div class="chat-body">
           <div class="chat-title">{{ item.nickName }}</div>
-          <div class="chat-content">[Emoji]</div>
+          <div class="chat-content">{{ item.body }}</div>
         </div>
-        <div class="chat-time">11mins</div>
+        <div class="chat-time">{{ item.time | date: 'HH:mm' }}</div>
       </li>
     </ul>
-
-    <div class="chat-nav">
-      <div class="nav-item active">
-        <i nz-icon type="wechat" theme="outline"></i>
-      </div>
-      <div class="nav-item">
-        <i nz-icon type="user" theme="outline"></i>
-      </div>
-      <div class="nav-item">
-        <i nz-icon type="setting" theme="outline"></i>
-      </div>
-    </div>
+    <app-nav></app-nav>
   </div>
-  <div class="message-box-container" *ngIf="selectUserId">
+  <div class="message-box-container" *ngIf="data.chatUserId">
     <div class="chat-box-header">
       <div class="header-user-info">
         <div class="user-info-name">CatChat</div>
-        <div class="user-info-dynamic">嘿嘿。。。❤❤❤{{ chatService.count }}</div>
+        <div class="user-info-dynamic">嘿嘿。。。❤❤❤</div>
       </div>
       <div class="header-more">...</div>
     </div>
     <div class="chat-box-body">
       <ul class="chat-list">
-        <li class="chat-item" *ngFor="let item of (chatService.messageRecord.get(selectUserId) || [])" [ngClass]="{'right': item.Sender === user.id}">
+        <li class="chat-item" *ngFor="let item of (data.messageRecord.get(data.chatUserId) || [])" [ngClass]="{'right': item.sender === data.user.id}">
           <div class="chat-avatar">
             <img src="../../assets/avatars/1.jpg">
           </div>
           <div class="chat-content">
-            {{ item.Body }}
+            {{ item.body }}
+          </div>
+          <div class="chat-sending">
+            <nz-spin nzSimple [nzSpinning]="item.sending" [nzDelay]="500"></nz-spin>
+            <i nz-icon type="redo" theme="outline" style="font-size: 18px; color: red; cursor: pointer;" title="重新发送" *ngIf="!item.success"></i>
           </div>
         </li>
       </ul>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { LoginService } from './login.service';
-import { LoginRequest } from './models/LoginResquest';
+import { LoginService } from '../../services/login.service';
+import { LoginRequest } from '../../models/LoginResquest';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent {
 
   }
 
-  private submitForm(): void {
+  submitForm(): void {
     this.loginService.Login(this.form);
   }
 }

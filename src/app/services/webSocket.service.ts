@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Cat } from '../protobuf/CatMessage';
 import { ChatService } from './chat.service';
+import { Cat } from '../utils/protobuf/CatMessage';
 
 @Injectable()
 export class WebSocketService {
   private webSocket: WebSocket;
-  private timer: NodeJS.Timer;
+  private timer;
   private pingMessage = Cat.CatMessage.create({
     Type: Cat.CatMessage.MessageType.PING,
     Ping: {
