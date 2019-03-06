@@ -1,9 +1,6 @@
 <div class="main-container">
   <div class="message-list-container">
-    <div class="search-input">
-      <i nz-icon type="search" theme="outline"></i>
-      <input type="text" placeholder="Search...">
-    </div>
+    <app-search></app-search>
     <ul class="chat-list">
       <li class="chat-item" *ngFor="let item of data.latelyChats" (click)="switchChat(item.userId)" [ngClass]="{'active': data.chatUserId === item.userId}">
         <nz-badge [nzCount]="item.count">
@@ -21,8 +18,8 @@
   <div class="message-box-container" *ngIf="data.chatUserId">
     <div class="chat-box-header">
       <div class="header-user-info">
-        <div class="user-info-name">CatChat</div>
-        <div class="user-info-dynamic">嘿嘿。。。❤❤❤</div>
+        <div class="user-info-name">{{ data.friendMap.get(data.chatUserId).nickName }}</div>
+        <div class="user-info-dynamic">喵喵喵···🐱🐱🐱</div>
       </div>
       <div class="header-more">...</div>
     </div>
@@ -43,9 +40,9 @@
       </ul>
     </div>
     <div class="chat-box-footer">
-      <input type="text" class="footer-input" placeholder="Sending content" [(ngModel)]="sendContent">
+      <textarea nz-input [nzAutosize]="{ minRows: 1, maxRows: 6 }" class="footer-input" placeholder="Sending content" [(ngModel)]="sendContent"></textarea>
       <div class="footer-action">
-        <button type="button" class="action-send" (click)="send()">❤</button>
+        <button nz-button nzType="primary" (click)="send()">Send</button>
       </div>
     </div>
   </div>

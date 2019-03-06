@@ -12,30 +12,6 @@ ul,li{ padding:0;margin:0;list-style:none }
   flex-direction: column;
   background: #eee;
 
-  .search-input {
-    height: 50px;
-    box-shadow: 0 .5px #ccc;
-    padding-left: 12px;
-    font-size: 18px;
-    color: #a2a2a2;
-
-    input {
-      padding-left: 12px;
-      border: 0;
-      height: 100%;
-      line-height: 40px;
-      background: #eee;
-
-      &:focus {
-        outline: none;
-      }
-
-      &::-webkit-input-placeholder {
-        color: #a2a2a2;
-      }
-    }
-  }
-
   .chat-list {
     flex: 1;
 
@@ -158,6 +134,7 @@ ul,li{ padding:0;margin:0;list-style:none }
         background: #bae7ff;
         padding: 12px;
         max-width: 50%;
+        white-space: pre;
       }
 
       .chat-sending {
@@ -178,29 +155,23 @@ ul,li{ padding:0;margin:0;list-style:none }
 }
 
 .chat-box-footer {
-  height: 50px;
-  padding: 0 12px;
+  min-height: 50px;
+  padding: 9px 12px;
   display: flex;
   align-items: center;
   box-shadow: 0 -.5px #ccc;
 
   .footer-input {
-    flex: 1;
-    height: 100%;
     border: 0;
+    background: #eee;
+    resize: none;
 
     &:focus {
       outline: none;
     }
-
-    &::-webkit-input-placeholder {
-      color: #a2a2a2;
-    }
   }
 
-  .action-send {
-    border: 0;
-    background: 0;
-    color: #000;
+  .footer-action {
+    padding-left: 12px;
   }
 }

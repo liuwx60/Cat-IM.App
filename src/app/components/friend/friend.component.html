@@ -1,9 +1,6 @@
 <div class="friend-container">
   <div class="friend-list-container">
-    <div class="search-input">
-      <i nz-icon type="search" theme="outline"></i>
-      <input type="text" placeholder="Search...">
-    </div>
+    <app-search></app-search>
     <ul class="friend-list">
       <li class="friend-item" *ngFor="let item of data.friends" (click)="switchFriend(item)" [ngClass]="{'active': friend ? item.id === friend.id : false}">
         <nz-badge>
@@ -21,15 +18,24 @@
     <div class="friend-detail">
       <div class="header">
         <div class="info">
-          <div>{{ friend.nickName }}</div>
-          <div>哈哈哈。。。😝😝😝</div>
+          <div class="info-name">{{ friend.nickName }}</div>
+          <div class="info-dynamic">喵喵喵。。。😝😝😝</div>
         </div>
         <div class="avatar">
           <img src="../../../assets/avatars/1.jpg">
         </div>
       </div>
 
-      <div class="detail"></div>
+      <div class="detail">
+        <div>
+          <label>备注</label>
+          <span>Cat🐱</span>
+        </div>
+        <div>
+          <label>地区</label>
+          <span>福建 泉州</span>
+        </div>
+      </div>
       <div class="action">
           <button nz-button nzType="primary" (click)="sendMsg()">Send Message</button>
       </div>

@@ -21,6 +21,7 @@ import { FriendComponent } from './components/friend/friend.component';
 import { NavComponent } from './components/shared/nav/nav.component';
 import { InitService } from './services/init.service';
 import { DataService } from './services/data.service';
+import { SearchComponent } from './components/shared/search/search.component';
 
 registerLocaleData(zh);
 
@@ -30,7 +31,8 @@ registerLocaleData(zh);
     LoginComponent,
     MainComponent,
     FriendComponent,
-    NavComponent
+    NavComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
