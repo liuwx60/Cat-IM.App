@@ -48,6 +48,7 @@ export class ChatService {
       message.sending = false;
     }, () => {
       message.success = false;
+      message.sending = false;
     });
   }
 

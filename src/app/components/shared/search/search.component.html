@@ -1,8 +1,22 @@
 <div class="search-input">
   <nz-input-group [nzSuffix]="suffixIconSearch">
-    <input type="text" nz-input placeholder="input search text">
+    <input type="text" nz-input placeholder="input username" #username (keyup.enter) = "onSearch(username.value)">
   </nz-input-group>
   <ng-template #suffixIconSearch>
     <i nz-icon type="search"></i>
   </ng-template>
+  <nz-modal [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" [nzFooter]="null">
+    <div class="find-result" *ngIf="friend">
+      <div class="user-avatar">
+        <img [src]="avatarUrl + friend.id + '.jpg'" onerror="this.src='/assets/avatars/1.jpg'">
+      </div>
+      <div class="user-info">
+        <div class="user-nickname">{{ friend.nickName }}</div>
+        <div class="user-dynamic">喵喵喵🐱‍🐉</div>
+      </div>
+      <div class="user-action">
+        <button nz-button nzType="primary" [disabled]="friend.isFriend" (click)="addFriend(friend.id)">{{ friend.isFriend ? '已添加好友' : '添加好友' }}</button>
+      </div>
+    </div>
+  </nz-modal>
 </div>

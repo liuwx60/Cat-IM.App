@@ -22,6 +22,10 @@ import { NavComponent } from './components/shared/nav/nav.component';
 import { InitService } from './services/init.service';
 import { DataService } from './services/data.service';
 import { SearchComponent } from './components/shared/search/search.component';
+import { RegisterComponent } from './components/register/register.component';
+import { UserDetailComponent } from './components/setting/user-detail/user-detail.component';
+import { SettingComponent } from './components/setting/setting.component';
+import { UserAvatarComponent } from './components/setting/user-avatar/user-avatar.component';
 
 registerLocaleData(zh);
 
@@ -32,7 +36,11 @@ registerLocaleData(zh);
     MainComponent,
     FriendComponent,
     NavComponent,
-    SearchComponent
+    SearchComponent,
+    RegisterComponent,
+    UserDetailComponent,
+    SettingComponent,
+    UserAvatarComponent
   ],
   imports: [
     BrowserModule,

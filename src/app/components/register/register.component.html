@@ -1,29 +1,33 @@
 <div class="login-form">
   <div class="login-container">
     <div class="logo">
-      <span>Cat-IM</span>
+      <span>Register Cat-IM</span>
     </div>
     <form nz-form (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control>
           <nz-input-group [nzPrefix]="prefixUser">
-            <input type="text" nz-input placeholder="Username" name="username" [(ngModel)]="form.username">
+            <input type="text" nz-input placeholder="Username" name="username1" [(ngModel)]="form.username">
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
           <nz-input-group [nzPrefix]="prefixLock">
-            <input type="password" nz-input placeholder="Password" name="password" [(ngModel)]="form.password">
+            <input type="password" nz-input placeholder="Password" name="password1" [(ngModel)]="form.password1">
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <button nz-button nzBlock [nzType]="'primary'">Log in</button>
-          Or
-          <a routerLink="/register">register now!</a>
-          <a class="login-form-forgot">Forgot password</a>
+          <nz-input-group [nzPrefix]="prefixLock">
+            <input type="password" nz-input placeholder="Confirm Password" name="password2" [(ngModel)]="form.password2">
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzBlock [nzType]="'primary'">Submit</button>
         </nz-form-control>
       </nz-form-item>
     </form>

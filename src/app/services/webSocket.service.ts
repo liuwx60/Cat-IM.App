@@ -26,6 +26,13 @@ export class WebSocketService {
     this.webSocket.onmessage = this.onMessage;
   }
 
+  public close(): void {
+    this.webSocket.close();
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+  }
+
   private onOpen = (event: Event): void => {
     event.preventDefault();
     console.log('webSocker连接成功！');

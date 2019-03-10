@@ -1,0 +1,44 @@
+ul,li{ padding:0;margin:0;list-style:none }
+
+.user-detail-container {
+  height: 100%;
+  display: flex;
+}
+
+.settings-container {
+  width: 280px;
+  box-shadow: .5px 0 0 #ccc;
+  display: flex;
+  flex-direction: column;
+  background: #eee;
+
+  .settings {
+    flex: 1;
+    padding: 0 12px;
+
+    .setting-item {
+      height: 40px;
+      line-height: 40px;
+      box-shadow: 0 .5px #ccc;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+
+      a {
+        color: #000;
+        flex: 1;
+      }
+    }
+  }
+}
+
+.user-setting-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+  .user-setting {
+    margin-top: 150px;
+    width: 400px;
+  }
+}
