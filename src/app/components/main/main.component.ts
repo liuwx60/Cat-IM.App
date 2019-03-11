@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { SendMessageRequest } from 'src/app/models/SendMessageRequest';
 import { DataService } from 'src/app/services/data.service';
+import { ClientConfig } from 'src/app/utils/client-config';
 
 @Component({
   selector: 'app-main',
@@ -14,6 +15,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class MainComponent implements OnInit {
   sendContent: string;
+  avatarUrl = ClientConfig.avatarUrl + '/';
 
   constructor(
     private friendService: FriendService,

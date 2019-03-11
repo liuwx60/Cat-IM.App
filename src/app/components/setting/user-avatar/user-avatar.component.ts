@@ -12,7 +12,7 @@ import { Observable, Observer } from 'rxjs';
 export class UserAvatarComponent implements OnInit {
   loading = false;
   avatarUrl: string;
-  actionUrl = `${ClientConfig.baseUrl}/api/user/upload/avatar`;
+  actionUrl = ClientConfig.uploadUrl;
 
   constructor(
     private data: DataService,
@@ -20,20 +20,20 @@ export class UserAvatarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.avatarUrl = `${ClientConfig.baseUrl}/upload/avatar/${this.data.user.id}.jpg`;
+    this.avatarUrl = `${ClientConfig.avatarUrl}/${this.data.user.id}`;
   }
 
   beforeUpload = (file: File) => {
     return new Observable((observer: Observer<boolean>) => {
       const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
       if (!isJPG) {
-        this.msg.error('You can only upload JPG file!');
+        this.msg.error('You can only upload JPG/PNG file!');
         observer.complete();
         return;
       }
       const isLtdot5M = file.size / 1024 / 1024 < 0.5;
       if (!isLtdot5M) {
-        this.msg.error('Image must smaller than .5MB!');
+        this.msg.error('Image must smaller than 0.5MB!');
         observer.complete();
         return;
       }
@@ -59,7 +59,7 @@ export class UserAvatarComponent implements OnInit {
         // this.getBase64(info.file.originFileObj, (img: string) => {
         //   this.avatarUrl = img;
         // });
-        this.avatarUrl = `${ClientConfig.baseUrl}/upload/avatar/${this.data.user.id}.jpg?v=${Math.random()}`;
+        this.avatarUrl = `${ClientConfig.avatarUrl}/${this.data.user.id}?v=${Math.random()}`;
         this.loading = false;
         break;
       case 'error':

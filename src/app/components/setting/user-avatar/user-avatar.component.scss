@@ -1,0 +1,17 @@
+.avatar-uploader {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar {
+  max-width: 100%;
+  max-height: 100%;
+}
+.upload-icon {
+  font-size: 32px;
+  color: #999;
+}
+.ant-upload-text {
+  margin-top: 8px;
+  color: #666;
+}

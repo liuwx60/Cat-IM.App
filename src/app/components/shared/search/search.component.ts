@@ -10,7 +10,7 @@ import { NzNotificationService } from 'ng-zorro-antd';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  avatarUrl = `${ClientConfig.baseUrl}/upload/avatar/`;
+  avatarUrl = ClientConfig.avatarUrl + '/';
   isVisible = false;
   friend: FriendFindResponse;
 

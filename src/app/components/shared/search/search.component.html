@@ -8,7 +8,7 @@
   <nz-modal [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" [nzFooter]="null">
     <div class="find-result" *ngIf="friend">
       <div class="user-avatar">
-        <img [src]="avatarUrl + friend.id + '.jpg'" onerror="this.src='/assets/avatars/1.jpg'">
+        <img [src]="avatarUrl + friend.id">
       </div>
       <div class="user-info">
         <div class="user-nickname">{{ friend.nickName }}</div>

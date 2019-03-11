@@ -4,7 +4,7 @@
     <ul class="friend-list">
       <li class="friend-item" *ngFor="let item of data.friends" (click)="switchFriend(item)" [ngClass]="{'active': friend ? item.id === friend.id : false}">
         <nz-badge>
-          <nz-avatar [nzSize]="40" nzSrc="../../assets/avatars/1.jpg"></nz-avatar>
+          <nz-avatar [nzSize]="40" [nzSrc]="avatarUrl + item.id"></nz-avatar>
         </nz-badge>
         <div class="friend-body">
           <div class="friend-title">{{ item.nickName }}</div>
@@ -22,7 +22,7 @@
           <div class="info-dynamic">喵喵喵。。。😝😝😝</div>
         </div>
         <div class="avatar">
-          <img src="../../../assets/avatars/1.jpg">
+          <img [src]="avatarUrl + item.id">
         </div>
       </div>
 

@@ -4,6 +4,7 @@ import { FriendResponse } from 'src/app/models/FriendResponse';
 import { ChatService } from 'src/app/services/chat.service';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { ClientConfig } from 'src/app/utils/client-config';
 
 @Component({
   selector: 'app-friend',
@@ -11,6 +12,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./friend.component.scss']
 })
 export class FriendComponent implements OnInit {
+  avatarUrl = ClientConfig.avatarUrl + '/';
   friend: FriendResponse = null;
 
   constructor(

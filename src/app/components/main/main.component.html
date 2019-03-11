@@ -4,7 +4,7 @@
     <ul class="chat-list">
       <li class="chat-item" *ngFor="let item of data.latelyChats" (click)="switchChat(item.userId)" [ngClass]="{'active': data.chatUserId === item.userId}">
         <nz-badge [nzCount]="item.count">
-          <nz-avatar [nzSize]="40" nzSrc="../../assets/avatars/1.jpg"></nz-avatar>
+          <nz-avatar [nzSize]="40" [nzSrc]="avatarUrl + item.userId"></nz-avatar>
         </nz-badge>
         <div class="chat-body">
           <div class="chat-title">{{ item.nickName }}</div>
@@ -27,7 +27,7 @@
       <ul class="chat-list">
         <li class="chat-item" *ngFor="let item of (data.messageRecord.get(data.chatUserId) || [])" [ngClass]="{'right': item.sender === data.user.id}">
           <div class="chat-avatar">
-            <img src="../../assets/avatars/1.jpg">
+            <img [src]="avatarUrl + (item.sender === data.user.id ? item.sender : item.receiver)">
           </div>
           <div class="chat-content">
             {{ item.body }}
