@@ -6,18 +6,16 @@ import { FriendResponse } from '../models/FriendResponse';
 import { DataService } from './data.service';
 import { ILatelyChat } from '../models/LatelyChat';
 import { IChatList } from '../models/ChatList';
+import { FriendService } from './friend.service';
 
 @Injectable()
 export class ChatService {
 
   constructor(
     private http: HttpService,
-    private data: DataService
-  ) {}
-
-  public ping(input: Cat.CatMessage): void {
-    console.log(input);
-  }
+    private data: DataService,
+    private friendService: FriendService
+  ) { }
 
   public send(data: SendMessageRequest): void {
     const messageList = this.data.messageRecord.get(data.receiver) || [];
@@ -69,6 +67,10 @@ export class ChatService {
     this.data.messageRecord.set(data.Sender, messageList);
 
     this.pushLatelyChat(this.data.friendMap.get(data.Sender), data);
+  }
+
+  public addFriend(): void {
+    this.friendService.get();
   }
 
   public pushLatelyChat(friend: FriendResponse, chat?: Cat.IChat): void {

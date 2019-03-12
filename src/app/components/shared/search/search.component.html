@@ -1,6 +1,6 @@
 <div class="search-input">
   <nz-input-group [nzSuffix]="suffixIconSearch">
-    <input type="text" nz-input placeholder="input username" #username (keyup.enter) = "onSearch(username.value)">
+    <input type="text" nz-input placeholder="input username" #username (keyup.enter)="onSearch(username.value)">
   </nz-input-group>
   <ng-template #suffixIconSearch>
     <i nz-icon type="search"></i>

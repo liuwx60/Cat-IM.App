@@ -48,11 +48,11 @@ export class WebSocketService {
       const catMessage = Cat.CatMessage.decode(buffer);
 
       switch (catMessage.Type) {
-        case Cat.CatMessage.MessageType.PING:
-          this.chatService.ping(catMessage);
-          break;
         case Cat.CatMessage.MessageType.CHAT:
           this.chatService.chat(catMessage.Chat);
+          break;
+        case Cat.CatMessage.MessageType.ADD_FRIEND:
+          this.chatService.addFriend();
           break;
         default:
           break;

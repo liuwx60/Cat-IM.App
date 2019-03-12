@@ -27,7 +27,7 @@
       <ul class="chat-list">
         <li class="chat-item" *ngFor="let item of (data.messageRecord.get(data.chatUserId) || [])" [ngClass]="{'right': item.sender === data.user.id}">
           <div class="chat-avatar">
-            <img [src]="avatarUrl + (item.sender === data.user.id ? item.sender : item.receiver)">
+            <img [src]="avatarUrl + item.sender">
           </div>
           <div class="chat-content">
             {{ item.body }}
@@ -40,7 +40,13 @@
       </ul>
     </div>
     <div class="chat-box-footer">
-      <textarea nz-input [nzAutosize]="{ minRows: 1, maxRows: 6 }" class="footer-input" placeholder="Sending content" [(ngModel)]="sendContent"></textarea>
+      <textarea nz-input 
+        [nzAutosize]="{ minRows: 1, maxRows: 6 }" 
+        class="footer-input" 
+        placeholder="Sending content" 
+        [(ngModel)]="sendContent"
+        (keydown)="onKeydown($event)">
+      </textarea>
       <div class="footer-action">
         <button nz-button nzType="primary" (click)="send()">Send</button>
       </div>
