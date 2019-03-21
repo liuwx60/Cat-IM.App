@@ -7,6 +7,8 @@ import { RegisterRequest } from '../models/RegisterRequest';
 import { Router } from '@angular/router';
 import { EditUserRequest } from '../models/EditUserRequest';
 import { NzNotificationService } from 'ng-zorro-antd';
+import { GetRouterResponse } from '../models/GetRouterResponse';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UserService {
@@ -38,5 +40,9 @@ export class UserService {
       this.data.user.gender = request.gender;
       this.notification.create('success', '成功', '保存成功！');
     });
+  }
+
+  public getRouter(): Observable<GetRouterResponse> {
+    return this.http.get<GetRouterResponse>('/api/router/get');
   }
 }

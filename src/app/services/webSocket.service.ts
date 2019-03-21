@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ChatService } from './chat.service';
 import { Cat } from '../utils/protobuf/CatMessage';
+import { UserService } from './user.service';
+import { NzMessageService } from 'ng-zorro-antd';
+import { concatMap } from 'rxjs/operators';
 
 @Injectable()
 export class WebSocketService {
@@ -14,12 +17,16 @@ export class WebSocketService {
   });
   private pingBuffer = Cat.CatMessage.encode(this.pingMessage).finish();
 
+  private reConnectCount = 0;
+
   constructor(
-    private chatService: ChatService
+    private chatService: ChatService,
+    private userService: UserService,
+    private message: NzMessageService
   ) {}
 
-  public connect(): void {
-    this.webSocket = new WebSocket('ws://127.0.0.1:8850/ws');
+  public connect(router: string): void {
+    this.webSocket = new WebSocket(`ws://${router}/ws`);
     this.webSocket.onopen = this.onOpen;
     this.webSocket.onclose = this.onClose;
     this.webSocket.onerror = this.onError;
@@ -27,7 +34,7 @@ export class WebSocketService {
   }
 
   public close(): void {
-    this.webSocket.close();
+    this.webSocket.close(1000);
     if (this.timer) {
       clearInterval(this.timer);
     }
@@ -64,11 +71,30 @@ export class WebSocketService {
     if (this.timer) {
       clearInterval(this.timer);
     }
-    console.log('webSocket断开连接！Code：' + event.code);
+
+    if (event.code !== 1000 && this.reConnectCount < 5) {
+      // tslint:disable-next-line:no-non-null-assertion
+      this.message.create('error', '网络连接已断开！', { nzDuration: 2500 }).onClose!.pipe(
+        concatMap(() => this.message.loading('连接中..', { nzDuration: 2500 }).messageId)
+      ).subscribe();
+
+      setTimeout(() => {
+        this.userService.getRouter().subscribe(x => {
+          this.connect(`${x.serviceAddress}:${x.servicePort}`);
+          this.reConnectCount++;
+        });
+      }, 5000);
+
+      return;
+    }
+
+    if (event.code !== 1000) {
+      this.message.create('error', '网络连接已断开！', { nzDuration: 0 });
+    }
   }
 
   private onError = (event: Event): void => {
-    console.log('webSocket发生错误！');
+    console.log('webSocket发生错误！', event);
   }
 
   private ping(): void {

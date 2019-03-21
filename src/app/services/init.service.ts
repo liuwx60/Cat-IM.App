@@ -19,9 +19,11 @@ export class InitService {
     if (!sessionStorage.getItem('token')) {
       return;
     }
-    this.webSocket.connect();
-    this.friendService.get();
+    this.userService.getRouter().subscribe(x => {
+      this.webSocket.connect(`${x.serviceAddress}:${x.servicePort}`);
+    });
     this.userService.get();
+    this.friendService.get();
 
     window.onblur = () => {
       this.data.windowOut = true;
