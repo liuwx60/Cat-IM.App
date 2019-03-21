@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     private chatService: ChatService,
-    private data: DataService
+    public data: DataService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class MainComponent implements OnInit {
 
   send(): void {
     const sendMsg = new SendMessageRequest();
-    sendMsg.body = this.sendContent;
+    sendMsg.body = this.sendContent || '';
     sendMsg.sender = this.data.user.id;
     sendMsg.receiver = this.data.chatUserId;
     sendMsg.sendOn = new Date();

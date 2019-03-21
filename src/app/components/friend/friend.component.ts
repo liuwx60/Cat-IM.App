@@ -19,7 +19,7 @@ export class FriendComponent implements OnInit {
     private friendService: FriendService,
     private chatService: ChatService,
     private router: Router,
-    private data: DataService
+    public data: DataService
   ) { }
 
   ngOnInit(): void {
