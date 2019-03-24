@@ -45,6 +45,7 @@ export class WebSocketService {
     console.log('webSocker连接成功！');
     this.ping();
     this.login();
+    this.chatService.getOfflineMsg();
   }
 
   private onMessage = (event: MessageEvent): void => {

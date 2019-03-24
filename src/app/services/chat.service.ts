@@ -7,6 +7,8 @@ import { DataService } from './data.service';
 import { ILatelyChat } from '../models/LatelyChat';
 import { IChatList } from '../models/ChatList';
 import { FriendService } from './friend.service';
+import { PagedList } from '../models/PagedList';
+import { OfflineMessageResponse } from '../models/OfflineMessageResponse';
 
 @Injectable()
 export class ChatService {
@@ -124,7 +126,7 @@ export class ChatService {
       ) as ILatelyChat[]
     ).map(x => {
       // tslint:disable-next-line:radix
-      x.time = new Date(parseInt(localStorage.getItem(`${this.data.user.id}:latelyChat:time:${x.userId}`)));
+      x.time = new Date(parseInt(localStorage.getItem(`${this.data.user.id}:latelyChat:time:${x.userId}`) || '0'));
       return x;
     }).sort((a, b) => {
       return b.time.getTime() - a.time.getTime();
@@ -149,5 +151,23 @@ export class ChatService {
     }
 
     latelyChat.count = 0;
+  }
+
+  public getOfflineMsg(): void {
+    this.http.get<PagedList<OfflineMessageResponse[]>>('/api/chat/offlineMessage').subscribe(x => {
+      x.rows.map(msg => {
+        this.chat({
+          Id: msg.id,
+          Body: msg.body,
+          Sender: msg.sender,
+          Receiver: msg.receiver,
+          SendOn: msg.sendOn.toString()
+        });
+      });
+
+      if (x.total > 100) {
+        this.getOfflineMsg();
+      }
+    });
   }
 }

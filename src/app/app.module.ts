@@ -26,6 +26,12 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserDetailComponent } from './components/setting/user-detail/user-detail.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { UserAvatarComponent } from './components/setting/user-avatar/user-avatar.component';
+import { PerfectScrollbarModule, PerfectScrollbarConfigInterface,
+  PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  wheelPropagation: true
+};
 
 registerLocaleData(zh);
 
@@ -48,7 +54,8 @@ registerLocaleData(zh);
     HttpClientModule,
     FormsModule,
     NgZorroAntdModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PerfectScrollbarModule
   ],
   providers: [
     HttpService,
@@ -59,7 +66,11 @@ registerLocaleData(zh);
     UserService,
     InitService,
     DataService,
-    { provide: NZ_I18N, useValue: zh_CN }
+    { provide: NZ_I18N, useValue: zh_CN },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,17 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
 import { SendMessageRequest } from 'src/app/models/SendMessageRequest';
 import { DataService } from 'src/app/services/data.service';
 import { ClientConfig } from 'src/app/utils/client-config';
+import { PerfectScrollbarConfigInterface, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
+  moduleId: 'src/app/components/app/main.component'
 })
 export class MainComponent implements OnInit {
   sendContent: string;
   avatarUrl = ClientConfig.avatarUrl + '/';
+
+  config: PerfectScrollbarConfigInterface = {};
+
+  @ViewChild(PerfectScrollbarDirective) directiveRef?: PerfectScrollbarDirective;
 
   constructor(
     private chatService: ChatService,
@@ -24,6 +30,7 @@ export class MainComponent implements OnInit {
   switchChat(userId: string): void {
     this.data.chatUserId = userId;
     this.chatService.clearChatCount(userId);
+    console.log(this.data.latelyChats);
   }
 
   send(): void {

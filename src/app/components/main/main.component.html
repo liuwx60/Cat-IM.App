@@ -1,7 +1,7 @@
 <div class="main-container">
   <div class="message-list-container">
     <app-search></app-search>
-    <ul class="chat-list">
+    <ul class="chat-list" [perfectScrollbar]="config">
       <li class="chat-item" *ngFor="let item of data.latelyChats" (click)="switchChat(item.userId)" [ngClass]="{'active': data.chatUserId === item.userId}">
         <nz-badge [nzCount]="item.count">
           <nz-avatar [nzSize]="40" [nzSrc]="avatarUrl + item.userId"></nz-avatar>
@@ -23,7 +23,7 @@
       </div>
       <div class="header-more">...</div>
     </div>
-    <div class="chat-box-body">
+    <div class="chat-box-body" [perfectScrollbar]="config">
       <ul class="chat-list">
         <li class="chat-item" *ngFor="let item of (data.messageRecord.get(data.chatUserId) || [])" [ngClass]="{'right': item.sender === data.user.id}">
           <div class="chat-avatar">
