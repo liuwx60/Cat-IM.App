@@ -17,7 +17,7 @@ export class MainComponent implements OnInit {
 
   config: PerfectScrollbarConfigInterface = {};
 
-  @ViewChild(PerfectScrollbarDirective) directiveRef?: PerfectScrollbarDirective;
+  @ViewChild('chatList', { read: PerfectScrollbarDirective }) directiveRef?: PerfectScrollbarDirective;
 
   constructor(
     private chatService: ChatService,
@@ -25,12 +25,25 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    Object.defineProperty(this.data.change, 'count', {
+      set: () => {
+        if (this.directiveRef) {
+          setTimeout(() => {
+            this.directiveRef.scrollToBottom();
+          }, 100);
+        }
+      }
+    });
   }
 
   switchChat(userId: string): void {
     this.data.chatUserId = userId;
     this.chatService.clearChatCount(userId);
-    console.log(this.data.latelyChats);
+    if (this.directiveRef) {
+      setTimeout(() => {
+        this.directiveRef.scrollToBottom();
+      }, 100);
+    }
   }
 
   send(): void {
@@ -43,6 +56,12 @@ export class MainComponent implements OnInit {
     this.chatService.send(sendMsg);
 
     this.sendContent = '';
+
+    if (this.directiveRef) {
+      setTimeout(() => {
+        this.directiveRef.scrollToBottom();
+      }, 100);
+    }
   }
 
   onKeydown(event: KeyboardEvent): void {

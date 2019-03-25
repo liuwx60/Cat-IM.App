@@ -18,5 +18,7 @@ export class DataService {
 
   public windowOut: boolean;
 
+  public change: { count: number } = { count: 1 };
+
   constructor() {}
 }

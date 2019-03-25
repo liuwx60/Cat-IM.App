@@ -69,6 +69,10 @@ export class ChatService {
     this.data.messageRecord.set(data.Sender, messageList);
 
     this.pushLatelyChat(this.data.friendMap.get(data.Sender), data);
+
+    if (data.Sender === this.data.chatUserId) {
+      this.data.change.count++;
+    }
   }
 
   public addFriend(): void {
