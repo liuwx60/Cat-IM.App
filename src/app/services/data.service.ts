@@ -20,5 +20,7 @@ export class DataService {
 
   public change: { count: number } = { count: 1 };
 
+  public v = localStorage.getItem('v');
+
   constructor() {}
 }

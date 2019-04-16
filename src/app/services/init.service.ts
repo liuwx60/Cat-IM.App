@@ -4,6 +4,7 @@ import { FriendService } from './friend.service';
 import { WebSocketService } from './webSocket.service';
 import { DataService } from './data.service';
 import { ChatService } from './chat.service';
+import { NotificationService } from './notification.service';
 
 @Injectable()
 export class InitService {
@@ -12,7 +13,8 @@ export class InitService {
     private friendService: FriendService,
     private webSocket: WebSocketService,
     private data: DataService,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private notificationService: NotificationService
   ) {}
 
   public init(): void {
@@ -24,6 +26,7 @@ export class InitService {
     });
     this.userService.get();
     this.friendService.get();
+    this.notificationService.init();
 
     window.onblur = () => {
       this.data.windowOut = true;

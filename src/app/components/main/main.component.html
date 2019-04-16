@@ -27,7 +27,7 @@
       <ul class="chat-list">
         <li class="chat-item" *ngFor="let item of (data.messageRecord.get(data.chatUserId) || [])" [ngClass]="{'right': item.sender === data.user.id}">
           <div class="chat-avatar">
-            <img [src]="avatarUrl + item.sender">
+            <img [src]="avatarUrl + item.sender + '?v=' + data.v">
           </div>
           <div class="chat-content">
             {{ item.body }}

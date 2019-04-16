@@ -1,5 +1,5 @@
 export class ClientConfig {
-  public static baseUrl = 'http://localhost:5000';
-  public static uploadUrl = 'http://localhost:5000/api/user/upload/avatar';
-  public static avatarUrl = 'http://localhost:5000/api/user/avatar';
+  public static baseUrl = 'https://o.owoii.top:5003';
+  public static uploadUrl = 'https://o.owoii.top:5003/api/user/upload/avatar';
+  public static avatarUrl = 'https://o.owoii.top:5003/api/user/avatar';
 }

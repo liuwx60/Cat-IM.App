@@ -20,7 +20,7 @@ export class UserAvatarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.avatarUrl = `${ClientConfig.avatarUrl}/${this.data.user.id}`;
+    this.avatarUrl = `${ClientConfig.avatarUrl}/${this.data.user.id}?v=${this.data.v}`;
   }
 
   beforeUpload = (file: File) => {
@@ -55,11 +55,10 @@ export class UserAvatarComponent implements OnInit {
         this.loading = true;
         break;
       case 'done':
-        // Get this url from response in real world.
-        // this.getBase64(info.file.originFileObj, (img: string) => {
-        //   this.avatarUrl = img;
-        // });
-        this.avatarUrl = `${ClientConfig.avatarUrl}/${this.data.user.id}?v=${Math.random()}`;
+        const v = Math.random();
+        this.data.v = v.toString();
+        localStorage.setItem('v', v.toString());
+        this.avatarUrl = `${ClientConfig.avatarUrl}/${this.data.user.id}?v=${v}`;
         this.loading = false;
         break;
       case 'error':

@@ -9,6 +9,8 @@ import { IChatList } from '../models/ChatList';
 import { FriendService } from './friend.service';
 import { PagedList } from '../models/PagedList';
 import { OfflineMessageResponse } from '../models/OfflineMessageResponse';
+import { NotificationService } from './notification.service';
+import { ClientConfig } from '../utils/client-config';
 
 @Injectable()
 export class ChatService {
@@ -16,7 +18,8 @@ export class ChatService {
   constructor(
     private http: HttpService,
     private data: DataService,
-    private friendService: FriendService
+    private friendService: FriendService,
+    private notificationService: NotificationService
   ) { }
 
   public send(data: SendMessageRequest): void {
@@ -107,6 +110,8 @@ export class ChatService {
 
       if (this.data.chatUserId === friend.id && !this.data.windowOut) {
         latelyChat.count = 0;
+      } else {
+        this.notificationService.show(friend.nickName, chat.Body, `${ClientConfig.avatarUrl}/${friend.id}?v=${this.data.v}`);
       }
 
       localStorage.setItem(`${this.data.user.id}:latelyChat:time:${friend.id}`, latelyChat.time.getTime().toString());
