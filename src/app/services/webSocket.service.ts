@@ -26,7 +26,9 @@ export class WebSocketService {
   ) {}
 
   public connect(router: string): void {
-    this.webSocket = new WebSocket(`ws://${router}/ws`);
+    const protocol = document.location.protocol;
+    const isSsl = protocol === 'https:';
+    this.webSocket = new WebSocket(`${isSsl ? 'wss' : 'ws'}://${router}/ws`);
     this.webSocket.onopen = this.onOpen;
     this.webSocket.onclose = this.onClose;
     this.webSocket.onerror = this.onError;
