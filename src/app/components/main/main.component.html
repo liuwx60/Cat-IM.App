@@ -30,7 +30,8 @@
             <img [src]="avatarUrl + item.sender + '?v=' + data.v">
           </div>
           <div class="chat-content">
-            {{ item.body }}
+            <div *ngIf="item.type === messageType.CHAT">{{ item.body }}</div>
+            <img *ngIf="item.type === messageType.IMG" [src]="item.body" />
           </div>
           <div class="chat-sending">
             <nz-spin nzSimple [nzSpinning]="item.sending" [nzDelay]="500"></nz-spin>
@@ -40,15 +41,28 @@
       </ul>
     </div>
     <div class="chat-box-footer">
-      <textarea nz-input 
+      <textarea nz-input
+        id="send-input"
         [nzAutosize]="{ minRows: 1, maxRows: 6 }" 
         class="footer-input" 
         placeholder="Sending content" 
         [(ngModel)]="sendContent"
-        (keydown)="onKeydown($event)">
+        (keydown)="onKeydown($event)"
+        (paste)="onPaste($event)">
       </textarea>
       <div class="footer-action">
         <button nz-button nzType="primary" (click)="send()">Send</button>
+      </div>
+    </div>
+    <div class="send-img-modal" *ngIf="base64Img">
+      <div class="send-img-container">
+        <div class="img">
+          <img [src]="base64Img" />
+        </div>
+        <div class="action">
+          <a (click)="sendImg()">Send</a>
+          <a (click)="cancelSendImg()">Cancel</a>
+        </div>
       </div>
     </div>
   </div>

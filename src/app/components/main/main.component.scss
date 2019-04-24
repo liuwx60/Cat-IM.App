@@ -135,9 +135,22 @@ ul,li{ padding:0;margin:0;list-style:none }
         margin-left: 12px;
         margin-right: 12px;
         background: #bae7ff;
-        padding: 12px;
         max-width: 50%;
         white-space: pre;
+        border-radius: 5px;
+
+        img {
+          max-width: 100%;
+          border: 1px solid #ddd;
+          border-radius: 3px;
+        }
+
+        div {
+          padding: 12px;
+          margin: 0;
+          white-space: pre;
+          border-radius: 5px
+        }
       }
 
       .chat-sending {
@@ -176,5 +189,46 @@ ul,li{ padding:0;margin:0;list-style:none }
 
   .footer-action {
     padding-left: 12px;
+  }
+}
+
+.send-img-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: rgba(0,0,0,.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .send-img-container {
+    max-width: 900px;
+
+    .img {
+      max-width: 400px;
+      max-height: 400px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .action {
+      display: flex;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 12px;
+
+      a {
+        padding: 0 12px;
+        margin: 0 12px;
+      }
+    }
   }
 }

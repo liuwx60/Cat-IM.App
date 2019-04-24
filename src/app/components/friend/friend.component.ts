@@ -5,6 +5,7 @@ import { ChatService } from 'src/app/services/chat.service';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { ClientConfig } from 'src/app/utils/client-config';
+import { ReceiveService } from 'src/app/services/receive.service';
 
 @Component({
   selector: 'app-friend',
@@ -19,7 +20,8 @@ export class FriendComponent implements OnInit {
     private friendService: FriendService,
     private chatService: ChatService,
     private router: Router,
-    public data: DataService
+    public data: DataService,
+    private receiverService: ReceiveService
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +35,7 @@ export class FriendComponent implements OnInit {
     if (!this.friend) {
       return;
     }
-    this.chatService.pushLatelyChat(this.friend);
+    this.receiverService.pushLatelyChat(this.friend.id);
     this.data.chatUserId = this.friend.id;
     this.router.navigateByUrl('/main');
   }

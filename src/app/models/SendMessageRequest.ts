@@ -1,3 +1,5 @@
+import { Cat } from '../utils/protobuf/CatMessage';
+
 export class SendMessageRequest {
   constructor() {
     this.id = this.GUID();
@@ -7,6 +9,7 @@ export class SendMessageRequest {
   public sender: string;
   public receiver: string;
   public sendOn: Date;
+  public type: Cat.MessageType;
 
   private S4() {
     // tslint:disable-next-line:no-bitwise

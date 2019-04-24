@@ -4,16 +4,14 @@ import { Cat } from '../utils/protobuf/CatMessage';
 import { UserService } from './user.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { concatMap } from 'rxjs/operators';
+import { ReceiveService } from './receive.service';
 
 @Injectable()
 export class WebSocketService {
   private webSocket: WebSocket;
   private timer;
   private pingMessage = Cat.CatMessage.create({
-    Type: Cat.CatMessage.MessageType.PING,
-    Ping: {
-      Body: 'ping'
-    }
+    Type: Cat.MessageType.PING
   });
   private pingBuffer = Cat.CatMessage.encode(this.pingMessage).finish();
 
@@ -22,7 +20,8 @@ export class WebSocketService {
   constructor(
     private chatService: ChatService,
     private userService: UserService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private receiverService: ReceiveService
   ) {}
 
   public connect(router: string): void {
@@ -58,11 +57,14 @@ export class WebSocketService {
       const catMessage = Cat.CatMessage.decode(buffer);
 
       switch (catMessage.Type) {
-        case Cat.CatMessage.MessageType.CHAT:
-          this.chatService.chat(catMessage.Chat);
+        case Cat.MessageType.CHAT:
+          this.receiverService.chat(catMessage.Chat, Cat.MessageType.CHAT);
           break;
-        case Cat.CatMessage.MessageType.ADD_FRIEND:
-          this.chatService.addFriend();
+        case Cat.MessageType.IMG:
+          this.receiverService.chat(catMessage.Chat, Cat.MessageType.IMG);
+          break;
+        case Cat.MessageType.ADD_FRIEND:
+          this.receiverService.addFriend();
           break;
         default:
           break;
@@ -112,7 +114,7 @@ export class WebSocketService {
 
   private login(): void {
     const loginMessage = Cat.CatMessage.create({
-      Type: Cat.CatMessage.MessageType.LOGIN,
+      Type: Cat.MessageType.LOGIN,
       Login: {
         Token: sessionStorage.getItem('token')
       }

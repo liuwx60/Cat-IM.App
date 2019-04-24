@@ -29,6 +29,8 @@ import { UserAvatarComponent } from './components/setting/user-avatar/user-avata
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface,
   PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { NotificationService } from './services/notification.service';
+import { ReceiveService } from './services/receive.service';
+import { FileService } from './services/file.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -68,6 +70,8 @@ registerLocaleData(zh);
     InitService,
     DataService,
     NotificationService,
+    ReceiveService,
+    FileService,
     { provide: NZ_I18N, useValue: zh_CN },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
